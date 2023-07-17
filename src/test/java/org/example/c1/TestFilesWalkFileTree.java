@@ -13,6 +13,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TestFilesWalkFileTree {
 
     public static void main(String[] args) throws IOException {
+//        Files.delete(Paths.get("C:\\Users\\Administrator\\Desktop\\图片 - 副本"));
+        Files.walkFileTree(Paths.get("C:\\Users\\Administrator\\Desktop\\message-queue-rabbit_product_diding - 副本"),new SimpleFileVisitor<Path>(){
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+//                System.out.println(file);
+                Files.delete(file);
+                return super.visitFile(file, attrs);
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+//                System.out.println("====> 退出" + dir);
+                Files.delete(dir);
+                return super.postVisitDirectory(dir, exc);
+            }
+        });
+    }
+
+    private static void m2() throws IOException {
         AtomicInteger vueCount = new AtomicInteger();
         Files.walkFileTree(Paths.get("C:\\Users\\Administrator\\Desktop\\vue_test\\vue_demo6"), new SimpleFileVisitor<Path>() {
             @Override
