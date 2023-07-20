@@ -34,12 +34,14 @@ public class Server {
         while (true) {
             // 4. accept 建立与客户端的连接, SocketChannel 用来与客户端之间通信
             log.info("connecting...");
+            // 阻塞方法, 线程停止运行
             SocketChannel sc = ssc.accept();
             log.info("connected:{}", sc);
             channels.add(sc);
             for (SocketChannel channel : channels) {
                 // 5. 接收客户端发送的数据
                 log.info("before read:{}", channel);
+                // 阻塞方法, 线程停止运行
                 channel.read(buffer);
                 buffer.flip();
                 debugRead(buffer);
