@@ -35,7 +35,6 @@ public class Server {
         List<SocketChannel> channels = new ArrayList<>();
         while (true) {
             // 4. accept 建立与客户端的连接, SocketChannel 用来与客户端之间通信
-            log.info("connecting...");
             // 非阻塞方法, 线程还会继续运行, 如果没有连接建立, sc 为 null
             SocketChannel sc = ssc.accept();
             if (sc != null) {
@@ -44,10 +43,8 @@ public class Server {
                 sc.configureBlocking(false);
                 channels.add(sc);
             }
-            channels.add(sc);
             for (SocketChannel channel : channels) {
                 // 5. 接收客户端发送的数据
-                log.info("before read:{}", channel);
                 // 非阻塞模式, 线程仍然会继续运行, 如果没有读到数据, read 返回 0
                 int read = channel.read(buffer);
                 if (read > 0) {
