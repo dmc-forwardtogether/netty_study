@@ -12,7 +12,7 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         SocketChannel sc = SocketChannel.open();
-        sc.connect(new InetSocketAddress("localhost", 10000));
+        sc.connect(new InetSocketAddress("localhost", 10001));
         System.out.println("waiting...");
     }
 }
